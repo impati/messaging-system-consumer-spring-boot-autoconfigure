@@ -83,11 +83,13 @@ public class MessagingSystemConsumerAutoConfiguration {
     @ConditionalOnBean(MessagingSystemPoller.class)
     public ConsumerInitializer consumerInitializer(
             ClientRegister clientRegister,
+            ChannelSubscriber channelSubscriber,
             ChannelRegistration channelRegistration,
             MessagingSystemPoller messagingSystemPoller
     ) {
         return new ConsumerInitializer(
                 clientRegister,
+                channelSubscriber,
                 channelRegistration,
                 properties,
                 messagingSystemPoller
