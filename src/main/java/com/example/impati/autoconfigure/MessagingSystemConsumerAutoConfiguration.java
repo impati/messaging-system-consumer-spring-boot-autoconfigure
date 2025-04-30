@@ -11,6 +11,7 @@ import com.example.impati.messaging_system_consumer.core.SimpleChannelSubscriber
 import com.example.impati.messaging_system_consumer.core.SimpleClientRegister;
 import com.example.impati.messaging_system_consumer.core.SimpleMessagingSystemConsumer;
 import com.example.impati.messaging_system_consumer.core.SimpleMessagingSystemPoller;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -59,10 +60,13 @@ public class MessagingSystemConsumerAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public <T> MessagingSystemConsumer<T> messagingSystemConsumer(WebClient.Builder webClientBuilder, MessagingSystemProperties properties) {
+    public <T> MessagingSystemConsumer<T> messagingSystemConsumer(WebClient.Builder webClientBuilder,
+                                                                  MessagingSystemProperties properties,
+                                                                  ObjectMapper objectMapper) {
         return new SimpleMessagingSystemConsumer<>(
                 webClientBuilder,
-                properties
+                properties,
+                objectMapper
         );
     }
 
