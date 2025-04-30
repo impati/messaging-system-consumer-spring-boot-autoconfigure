@@ -1,1 +1,1 @@
-com.example.impati.autoconfigure.MessagingSystemPublisherAutoConfiguration
+com.example.impati.autoconfigure.MessagingSystemConsumerAutoConfiguration

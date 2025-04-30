@@ -1,4 +1,4 @@
-package com.example.impati.messagingsystemconsumerspringbootautoconfigure;
+package com.example.impati.autoconfigure;
 
 import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;

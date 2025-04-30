@@ -1,4 +1,4 @@
-package com.example.impati.messagingsystemconsumerspringbootautoconfigure;
+package com.example.impati.autoconfigure;
 
 import com.example.impati.messaging_system_consumer.core.ChannelRegistration;
 import com.example.impati.messaging_system_consumer.core.ChannelSubscriber;
