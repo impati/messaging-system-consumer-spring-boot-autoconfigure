@@ -11,7 +11,6 @@ import com.example.impati.messaging_system_consumer.core.SimpleChannelSubscriber
 import com.example.impati.messaging_system_consumer.core.SimpleClientRegister;
 import com.example.impati.messaging_system_consumer.core.SimpleMessagingSystemConsumer;
 import com.example.impati.messaging_system_consumer.core.SimpleMessagingSystemPoller;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -60,26 +59,22 @@ public class MessagingSystemConsumerAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public <T> MessagingSystemConsumer<T> messagingSystemConsumer(WebClient.Builder webClientBuilder,
-                                                                  MessagingSystemProperties properties,
-                                                                  ObjectMapper objectMapper) {
-        return new SimpleMessagingSystemConsumer<>(
-                webClientBuilder,
-                properties,
-                objectMapper
-        );
+    public MessagingSystemConsumer messagingSystemConsumer(WebClient.Builder webClientBuilder, MessagingSystemProperties properties) {
+        return new SimpleMessagingSystemConsumer(webClientBuilder, properties);
     }
 
     @Bean
     @ConditionalOnBean(MessagingSystemListener.class)
     @ConditionalOnMissingBean(MessagingSystemPoller.class)
-    public <T> MessagingSystemPoller messagingSystemPoller(
-            MessagingSystemConsumer<T> messagingSystemConsumer,
-            MessagingSystemListener<T> messagingSystemListener
+    public MessagingSystemPoller messagingSystemPoller(
+            MessagingSystemConsumer messagingSystemConsumer,
+            MessagingSystemListener messagingSystemListener,
+            ChannelRegistration channelRegistration
     ) {
-        return new SimpleMessagingSystemPoller<>(
+        return new SimpleMessagingSystemPoller(
                 messagingSystemConsumer,
-                messagingSystemListener
+                messagingSystemListener,
+                channelRegistration
         );
     }
 
