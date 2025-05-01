@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.example.impati'
-version = '1.0.5'
+version = '1.0.6'
 
 
 java {
@@ -32,7 +32,7 @@ dependencyManagement {
 dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-autoconfigure-processor"
     implementation 'org.springframework.boot:spring-boot-starter-webflux:3.3.2'
-    implementation 'com.github.impati:messaging-system-consumer:1.1.6'
+    implementation 'com.github.impati:messaging-system-consumer:1.1.7'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

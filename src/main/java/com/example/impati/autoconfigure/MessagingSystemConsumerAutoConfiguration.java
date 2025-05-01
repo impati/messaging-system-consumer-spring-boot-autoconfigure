@@ -59,19 +59,19 @@ public class MessagingSystemConsumerAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public MessagingSystemConsumer messagingSystemConsumer(WebClient.Builder webClientBuilder, MessagingSystemProperties properties) {
-        return new SimpleMessagingSystemConsumer(webClientBuilder, properties);
+    public <T> MessagingSystemConsumer<T> messagingSystemConsumer(WebClient.Builder webClientBuilder, MessagingSystemProperties properties) {
+        return new SimpleMessagingSystemConsumer<>(webClientBuilder, properties);
     }
 
     @Bean
     @ConditionalOnBean(MessagingSystemListener.class)
     @ConditionalOnMissingBean(MessagingSystemPoller.class)
-    public MessagingSystemPoller messagingSystemPoller(
-            MessagingSystemConsumer messagingSystemConsumer,
-            MessagingSystemListener messagingSystemListener,
+    public <T> MessagingSystemPoller messagingSystemPoller(
+            MessagingSystemConsumer<T> messagingSystemConsumer,
+            MessagingSystemListener<T> messagingSystemListener,
             ChannelRegistration channelRegistration
     ) {
-        return new SimpleMessagingSystemPoller(
+        return new SimpleMessagingSystemPoller<>(
                 messagingSystemConsumer,
                 messagingSystemListener,
                 channelRegistration
